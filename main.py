@@ -322,11 +322,11 @@ LEADS = [
 # (number, section, headline, deck, pin lon/lat or None, pin offset)
 STORIES = [
     (4, "MIDDLE EAST", "IRAN DRONES TARGET US RADAR IN BAHRAIN",
-     "No casualties reported.", 50.5, 26.2, -18, 12),
+     "No casualties reported.", 50.5, 26.2, -34, 0),
     (5, "MIDDLE EAST", "US STRIKES IRGC LAUNCH SITE ON QESHM",
      "Tehran denies damage.", 55.5, 27.0, 18, 14),
     (6, "MIDDLE EAST", "UK SANCTIONS 8 ISRAELI SETTLEMENT FIRMS",
-     "Two-state bid defended.", -0.1, 51.5, -26, -18),
+     "Two-state bid defended.", -0.1, 51.5, -26, -6),
     (7, "MIDDLE EAST", "WEST URGES ISRAEL TO OPEN GAZA AID CROSSINGS",
      "Nations demand aid now.", 34.5, 31.5, -14, 14),
     (8, "MIDDLE EAST", "HOUTHIS ADVANCE AS YEMEN FORCES RETREAT",
@@ -340,9 +340,9 @@ STORIES = [
     (12, "ASIA-PACIFIC", "MONGOLIA PRESIDENT TO STEP DOWN",
      "Amid corruption claims.", 106.9, 47.9, 0, 0),
     (13, "ASIA-PACIFIC", "TURKEY TAKES SOZCU TV OFF AIR AFTER RAID",
-     "Raid silences channel.", 32.9, 39.9, 24, 6),
+     "Raid silences channel.", 32.9, 39.9, 34, -2),
     (14, "ASIA-PACIFIC", "CANADA AND CHINA AGREE TO EXPAND TRADE",
-     "Tariffs cut both ways.", -75.7, 45.4, -20, -30),
+     "Tariffs cut both ways.", -75.7, 45.4, -18, -22),
     (15, "MARKETS & TECH", "NVIDIA BEATS: $115.8BN QUARTER, GUIDES $130BN",
      "Shares jump late today.", -122.0, 37.4, -16, -14),
     (16, "MARKETS & TECH", "NASDAQ IN CORRECTION AS STOCKS SLIDE AGAIN",
@@ -352,7 +352,7 @@ STORIES = [
     (18, "AMERICAS", "US LOSES MEASLES ELIMINATION STATUS",
      "Most cases since 1991.", -74.0, 40.7, 26, -20),
     (19, "AMERICAS", "SUPREME COURT REJECTS TRUMP DEI GRANT APPEAL",
-     "$60m cuts stand.", -77.0, 38.9, -28, -22),
+     "$60m cuts stand.", -77.0, 38.9, -40, -28),
     (20, "AMERICAS", "HOUSE DEMOCRATS SET OPENING AGENDA",
      "Health care leads list.", -77.0, 38.9, 26, 6),
     (21, "AMERICAS", "MAMDANI DISBANDS NOTORIOUS NYPD UNIT",
@@ -363,7 +363,35 @@ STORIES = [
      "A first for Starship.", -97.2, 25.9, 0, 0),
     (24, "SPORT & CULTURE", "PATTINSON NAMED NEXT JAMES BOND",
      "Pattinson named as 007.", -0.1, 51.5, -28, 16),
+    (25, "MIDDLE EAST", "IRAQ RESUMES OIL VIA KIRKUK-CEYHAN LINE",
+     "Oil flows restart.", 44.4, 35.5, 16, -28),
+    (26, "MIDDLE EAST", "SIX DRONES DOWNED OVER MECCA AND RIYADH",
+     "Intercepted in hours.", 46.7, 24.7, 20, 20),
+    (27, "EUROPE", "BERLIN BANS HEZBOLLAH-LINKED GROUP",
+     "28 sites raided.", 13.4, 52.5, 26, -8),
+    (28, "ASIA-PACIFIC", "BILKIS BANO CHALLENGES BAIL",
+     "Bail for two convicts.", 72.8, 23.0, 0, 0),
+    (29, "ASIA-PACIFIC", "JAPAN OPENS OIL STORAGE TO ASEAN NATIONS",
+     "Energy crisis backstop.", 135.5, 34.7, 0, 24),
+    (30, "MARKETS & TECH", "JPMORGAN BLAMES SOFTWARE BUG",
+     "Bank outage, no hack.", -74.0, 40.7, 48, -6),
+    (31, "MARKETS & TECH", "ULA BLAMES LOW BOOSTER THRUST FOR VULCAN LOSS",
+     "Sunday failure update.", -80.6, 28.4, 30, 34),
+    (32, "AMERICAS", "PENTAGON FAILS AUDIT AGAIN",
+     "Ninth straight failure.", -77.0, 38.9, 44, 28),
+    (33, "AMERICAS", "WHITE HOUSE VETS ALL AGENCY TESTIMONY",
+     "Approval needed first.", -77.0, 38.9, -58, -14),
+    (34, "SPORT & CULTURE", "DHONI RETIRES FROM IPL, BECOMES CSK MENTOR",
+     "Mentor role from 2027.", 80.3, 13.1, 0, 0),
 ]
+
+# New stories 25-34 verified 2026-11-18 against 17 Nov 2026 reporting:
+# Level Headlines daily brief 17 Nov (JPMorgan bug, ULA update, Pentagon
+# audit, White House testimony); Zark News briefing 17 Nov (Pentagon,
+# White House); Middle East Forum Roman Report 17 Nov (Iraq pipeline,
+# Mecca/Riyadh drones, Berlin ban); The Hindu 17 Nov (Bilkis Bano,
+# Dhoni, Japan storage). ULA story is the Tue 17 Nov media update on
+# the Sun 15 Nov failure, not the failure itself.
 
 # Lead-story pins on the map (number shown on the pin is the lead index).
 LEAD_PINS = [(1, 34.0, 45.0, 0, -16), (2, 121.0, 14.6, 0, 0),
@@ -378,7 +406,7 @@ COLUMNS = [
     (688, ["AMERICAS", "SPORT & CULTURE"]),
 ]
 COL_W = 312
-COL_TOP = 584
+COL_TOP = 476
 COL_BOTTOM = 998
 
 
@@ -434,15 +462,15 @@ def draw_story(cv, x, y, num, headline, deck, max_w_chars):
     tw = text_width(label, 1)
     cv.draw_text(x + (22 - tw) // 2, y + 4, label, 1, (255, 255, 255))
     hx = x + 30
-    y = cv.text_block(hx, y, headline, 2, INK, max_w_chars, leading=15)
-    y = cv.text_block(hx, y + 1, deck, 2, GREY, max_w_chars, leading=15)
-    return y + 4
+    y = cv.text_block(hx, y, headline, 2, INK, max_w_chars, leading=13)
+    y = cv.text_block(hx, y + 1, deck, 2, GREY, max_w_chars, leading=13)
+    return y + 2
 
 
 def draw_section(cv, x, y, title):
     cv.draw_text(x, y, title, 2, RED)
-    cv.hline(x, y + 18, COL_W, RED, 2)
-    return y + 27
+    cv.hline(x, y + 16, COL_W, RED, 2)
+    return y + 24
 
 
 def build():
@@ -453,10 +481,10 @@ def build():
     cv.rect(0, 0, 4, H, INK)
     cv.rect(W - 4, 0, 4, H, INK)
 
-    # ---- masthead
-    cv.draw_text(W // 2, 16, "THE WORLD IN ONE DAY", 5, INK, align="center")
-    cv.draw_text(W // 2, 58, "TUESDAY 17 NOVEMBER 2026", 4, RED, align="center")
-    cv.hline(24, 96, W - 48, INK, 3)
+    # ---- masthead (bolder: larger title, heavier rule)
+    cv.draw_text(W // 2, 14, "THE WORLD IN ONE DAY", 6, INK, align="center")
+    cv.draw_text(W // 2, 60, "TUESDAY 17 NOVEMBER 2026", 4, RED, align="center")
+    cv.hline(24, 97, W - 48, INK, 4)
 
     # ---- lead story (full width)
     y = 106
@@ -489,14 +517,14 @@ def build():
                 cy = draw_story(cv, col_x, cy, num, head, deck, max_chars)
                 if cy > COL_BOTTOM:
                     break
-            cy += 4
+            cy += 2
 
     # ---- footer
     cv.hline(24, COL_BOTTOM + 6, W - 48, INK, 2)
     cv.draw_text(24, COL_BOTTOM + 12,
                  "ALL STORIES FIRST REPORTED TUESDAY 17 NOVEMBER 2026",
                  1, GREY)
-    cv.draw_text(W - 24, COL_BOTTOM + 12, "24 STORIES - 6 REGIONS",
+    cv.draw_text(W - 24, COL_BOTTOM + 12, "34 STORIES - 6 REGIONS",
                  1, GREY, align="right")
     return bytes(cv.px)
 
